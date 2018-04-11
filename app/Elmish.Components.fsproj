@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Common.fs" />
+
+    <!-- Flatpickr -->
+    <Compile Include="Flatpickr/Types.fs" />
+    <Compile Include="Flatpickr/View.fs" />
+    <Compile Include="Flatpickr/State.fs" />
+    
+    <Compile Include="Types.fs" />
+    <Compile Include="View.fs" />
+    <Compile Include="State.fs" />
+    <Compile Include="App.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\Fable.React.Flatpickr\Fable.React.Flatpickr.fsproj" />
+  </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
+</Project>
