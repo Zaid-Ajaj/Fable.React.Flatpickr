@@ -3,9 +3,8 @@ open Fable.Helpers.Isomorphic
 
 type Page = 
     | Introduction 
-    | Contributing
-    | Flatpickr
-
+    | Usage
+    
 type State = { 
     CurrentPage : Page
     Flatpickr : Components.Flatpickr.Types.State 

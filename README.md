@@ -1,3 +1,4 @@
-# Elmish Components
+# Fable.React.Flatpickr
 
-A collection of high quality bindings for react components that are ready to use within Elmish applications 
+A complete binding for react-flatpickr that is ready to use within Elmish applications
+

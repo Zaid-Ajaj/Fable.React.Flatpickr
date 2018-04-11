@@ -24,7 +24,7 @@ console.log("Bundling for " + (isProduction ? "production" : "development") + ".
 
 module.exports = {
   devtool: "source-map",
-  entry: resolve('./app/Elmish.Components.fsproj'),
+  entry: resolve('./app/App.fsproj'),
   output: {
     filename: 'bundle.js',
     path: resolve('./dist'),

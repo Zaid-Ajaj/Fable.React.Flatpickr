@@ -1,9 +1,12 @@
 {
   "private": true,
+  "repository": {
+    "url": "https://github.com/Zaid-Ajaj/Fable.React.Flatpickr.git"
+  },
   "scripts": {
     "build": "webpack -p",
     "start": "webpack-dev-server",
-    "test": "node ./node_modules/qunitjs/bin/qunit public/bundle.js"
+    "publish": "npm run build && node publish.js"
   },
   "dependencies": {
     "babel-runtime": "6.23.0",
@@ -23,6 +26,7 @@
     "css-loader": "^0.28.11",
     "fable-loader": "1.1.6",
     "fable-utils": "^1.0.6",
+    "gh-pages": "^1.1.0",
     "loglevel": "^1.6.0",
     "node-sass": "^4.8.3",
     "qunitjs": "^2.4.1",

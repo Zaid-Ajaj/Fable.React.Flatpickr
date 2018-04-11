@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>Fable.React binding for Flatpickr component</Description>
-    <PackageProjectUrl></PackageProjectUrl>
-    <RepositoryUrl></RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Zaid-Ajaj/elmish-components</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Zaid-Ajaj/elmish-components</RepositoryUrl>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageIconUrl></PackageIconUrl>
     <PackageTags>fsharp;fable</PackageTags>
-    <Authors></Authors>
-    <Version></Version>
+    <Authors>Zaid Ajaj</Authors>
+    <Version>1.0.0</Version>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>

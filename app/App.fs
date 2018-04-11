@@ -4,7 +4,6 @@ open Elmish
 open Elmish.HMR
 open Elmish.React
 open Elmish.Debug
-open Elmish.Browser.UrlParser
 open Elmish.Browser.Navigation
 open Fable.Core.JsInterop
 

@@ -84,16 +84,23 @@ Target "PublishFlatpickr" (publish ("src" </> "Fable.React.Flatpickr"))
 Target "Compile" <| fun _ ->
     run dotnetCli "fable npm-run build --port free" app
 
+Target "PublishApp" <| fun _ ->
+    run "npm" "run publush" "."
 
 "Clean"
   ==> "InstallNpmPackages"
   ==> "Restore"
   ==> "Watch"
 
-
 "Clean"
   ==> "InstallNpmPackages"
   ==> "Restore"
   ==> "Compile"
 
-RunTargetOrDefault "RunTests"
+"Clean"
+  ==> "InstallNpmPackages"
+  ==> "Restore"
+  ==> "Compile"
+  ==> "PublishApp"
+
+RunTargetOrDefault "Compile"

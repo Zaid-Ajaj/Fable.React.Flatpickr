@@ -21,27 +21,18 @@ let sidebar state dispatch =
           Menu.label [ ] [ str "General" ]
           Menu.list [ ] 
                [ menuItem Introduction state.CurrentPage "Introduction" dispatch
-                 menuItem Contributing state.CurrentPage "Contributing" dispatch ]
-          Menu.label [ ] [ str "Components" ]
-          Menu.list  [ ]  
-               [ menuItem Flatpickr state.CurrentPage "Flatpickr" dispatch ] ] 
+                 menuItem Usage state.CurrentPage "Usage" dispatch ] ]
 
 let introduction = 
     div [ ]  
-        [ h1 [ ] [ str "Elmish Components" ]
+        [ h1 [ Style [ FontSize 30 ] ] [ str "Fable.React.Flatpickr" ]
           hr [ ] 
-          p  [ ] [ str "Elmish components is an effort of porting many React components to high-quality Elmish components that are well documented and easy to showcase." ] ]
-
-let contributing = 
-    div [ ]  
-        [ h1 [ ] [ str "Contributing" ]
-          hr [ ] ]
+          p  [ ] [ str "Fable binding for react-flatpickr that is ready to use within Elmish applications" ] ]
 
 let main state dispatch = 
     match state.CurrentPage with 
     | Introduction -> introduction 
-    | Contributing -> contributing
-    | Flatpickr -> Components.Flatpickr.View.render state.Flatpickr (FlatpickrMsg >> dispatch)
+    | Usage -> Components.Flatpickr.View.render state.Flatpickr (FlatpickrMsg >> dispatch)
 
 let spacing = Props.Style [ Props.Padding 20 ]
 
