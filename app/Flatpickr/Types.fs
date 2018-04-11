@@ -6,5 +6,4 @@ type State = {
     SelectedTime : DateTime 
 }
 
-type Msg = 
-    | UpdateSelectedTime of DateTime 
+type Msg = UpdateSelectedTime of DateTime 

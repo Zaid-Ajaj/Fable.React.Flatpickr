@@ -16,6 +16,20 @@ type private OptionType = {
     IsConfig : bool
 }
 
+[<Pojo>]
+type private DateRange = { 
+    ``to``: DateTime 
+    from: DateTime
+}
+
+
+[<Emit("$2[$0] = $1")>]
+let private setProp (propName: string) (propValue: obj) (any: obj) : unit = jsNative
+[<Emit("$0")>]
+let private typed<'a> (x: obj) : 'a = jsNative
+[<Emit("$0[$1]")>]
+let private getAs<'a> (x: obj) (key: string) : 'a = jsNative
+
 /// Sets the initial value for the Flatpickr component
 let Value (date: DateTime) = 
     { Value = date; IsConfig = false; Key = "value" }
@@ -51,6 +65,11 @@ let DefaultMinute (min: int) =
     { Value = min; IsConfig = true; Key = "defaultMinute" }
     |> unbox<IFlatpickrOption> 
 
+/// Enables display of week numbers in calendar.
+let EnableWeekNumbers (cond: bool) =  
+    { Value = cond; IsConfig = true; Key = "weekNumbers" }
+    |> unbox<IFlatpickrOption> 
+
 /// Registers an event handler for Flatpickr that is triggered when the user selects a new datetime value 
 let OnChange (callback: DateTime -> unit) =  
     { Value = unbox (fun (dates: DateTime[]) -> callback dates.[0]); 
@@ -78,22 +97,64 @@ let DateFormat (value: string) =
     { Value = value; IsConfig = true; Key = "dateFormat" }
     |> unbox<IFlatpickrOption>
 
-/// Hides the calender so that users cannot select dates
-let HideCalender (value: bool) = 
+/// Hides the calendar so that users cannot select dates
+let HideCalendar (value: bool) = 
     { Value = value; IsConfig = true; Key = "noCalendar" }
     |> unbox<IFlatpickrOption>    
 
 /// If set to true, makes sure that the picker is always set shown to the user
 let AlwaysOpen (value: bool) = 
     { Value = value; IsConfig = true; Key = "inline" }
-    |> unbox<IFlatpickrOption>   
+    |> unbox<IFlatpickrOption> 
 
-[<Emit("$2[$0] = $1")>]
-let private setProp (propName: string) (propValue: obj) (any: obj) : unit = jsNative
-[<Emit("$0")>]
-let private typed<'a> (x: obj) : 'a = jsNative
-[<Emit("$0[$1]")>]
-let private getAs<'a> (x: obj) (key: string) : 'a = jsNative
+/// Disallow the user to select the given dates 
+let DisableDates (dates: list<DateTime>) = 
+    let datesArray = Array.ofList dates 
+    { Value = datesArray; IsConfig = true; Key = "disable" }
+    |> unbox<IFlatpickrOption> 
+
+/// Disallow the user to select the dates using a predicate
+let DisableBy (pred: DateTime -> bool) = 
+    { Value = [| pred |]; IsConfig = true; Key = "disable" }
+    |> unbox<IFlatpickrOption> 
+
+/// Disallow the user to select the dates that are between the given ranges
+let DisableRanges (ranges: list<DateTime * DateTime>) =
+    let rangeObjects = 
+        ranges 
+        |> List.map (fun (fromDate, toDate) -> 
+            let range = obj() 
+            setProp "to" toDate range
+            setProp "from" fromDate range
+            range)
+        |> Array.ofList
+    { Value = rangeObjects; IsConfig = true; Key = "disable" }
+    |> unbox<IFlatpickrOption> 
+
+/// Enable only the given list of dates
+let EnableDates (dates: list<DateTime>) = 
+    let datesArray = Array.ofList dates 
+    { Value = datesArray; IsConfig = true; Key = "enable" }
+    |> unbox<IFlatpickrOption> 
+
+/// Enable only the dates that pass a given criteria
+let EnableBy (pred: DateTime -> bool) = 
+    { Value = [| pred |]; IsConfig = true; Key = "enable" }
+    |> unbox<IFlatpickrOption> 
+
+/// Enable only the given list of date ranges
+let EnableRanges (ranges: list<DateTime * DateTime>) =
+    let rangeObjects = 
+        ranges 
+        |> List.map (fun (fromDate, toDate) -> 
+            let range = obj() 
+            setProp "to" toDate range
+            setProp "from" fromDate range
+            range)
+        |> Array.ofList
+    { Value = rangeObjects; IsConfig = true; Key = "enable" }
+    |> unbox<IFlatpickrOption> 
+
 
 /// Initializes Flatpickr, a lightweight DateTime picker. 
 let flatpickr (options: IFlatpickrOption list) = 

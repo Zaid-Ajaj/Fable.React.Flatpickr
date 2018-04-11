@@ -26,13 +26,30 @@ let sidebar state dispatch =
 let introduction = 
     div [ ]  
         [ h1 [ Style [ FontSize 30 ] ] [ str "Fable.React.Flatpickr" ]
-          hr [ ] 
-          p  [ ] [ str "Fable binding for react-flatpickr that is ready to use within Elmish applications" ] ]
+          p  [ ] [ str "Fable binding for react-flatpickr that is ready to use within Elmish applications" ] 
+          br [ ] 
+          Common.highlight """type State = { SelectedTime : DateTime }
 
-let main state dispatch = 
-    match state.CurrentPage with 
-    | Introduction -> introduction 
-    | Usage -> Components.Flatpickr.View.render state.Flatpickr (FlatpickrMsg >> dispatch)
+type Msg = UpdateSelectedTime of DateTime 
+
+let init() = { SelectedTime = DateTime.Now }, Cmd.none
+
+let update msg state = 
+    match msg with 
+    | UpdateSelectedTime time ->
+        let nextState = { state with SelectedTime = time }
+        nextState, Cmd.none
+
+let render state dispatch = 
+    Flatpickr.flatpickr 
+        [ Flatpickr.Value state.SelectedTime 
+          Flatpickr.OnChange (UpdateSelectedTime >> dispatch)
+          Flatpickr.ClassName "input" ]
+          """
+          br [ ] 
+          hr [ ]
+          h1 [ Style [ FontSize 30 ] ] [ str "Examples and configurations" ]
+          br [ ] ]
 
 let spacing = Props.Style [ Props.Padding 20 ]
 
@@ -41,4 +58,6 @@ let render (state: State) dispatch =
         [ Column.column [ Column.Width (Column.All, Column.Is2) ] 
                         [ div [ spacing ] [ sidebar state dispatch ] ] 
           Column.column [ Column.Width (Column.All, Column.Is7) ] 
-                        [ div [ spacing ] [ main state dispatch ]  ] ]
+                        [ div [ spacing ] 
+                              [ introduction
+                                Components.Flatpickr.View.render state.Flatpickr (FlatpickrMsg >> dispatch) ]  ] ]

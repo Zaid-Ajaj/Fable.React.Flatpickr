@@ -9,7 +9,7 @@ var resolve = function(dir) {
 var packageContents = fs.readFileSync(resolve("package.json"));
 var package = JSON.parse(packageContents);
 
-ghPages.publish("sample", {
+ghPages.publish("dist", {
     repo: package.repository.url
 }, function(e) {
     if (e === undefined) {

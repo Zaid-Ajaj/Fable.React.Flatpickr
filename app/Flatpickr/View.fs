@@ -72,14 +72,14 @@ let render (state: State) dispatch =
           p [ ] [ str "Hide calender and only select time" ]
           Flatpickr.flatpickr 
             [ Flatpickr.ClassName "input"
-              Flatpickr.HideCalender true
+              Flatpickr.HideCalendar true
               Flatpickr.EnableTimePicker true
               Flatpickr.Value DateTime.Now ] 
           br [ ]
           br [ ]
           Common.highlight """Flatpickr.flatpickr 
     [ Flatpickr.ClassName "input"
-      Flatpickr.HideCalender true
+      Flatpickr.HideCalendar true
       Flatpickr.EnableTimePicker true
       Flatpickr.Value DateTime.Now ]"""
           br [ ]
@@ -97,5 +97,68 @@ let render (state: State) dispatch =
       Flatpickr.MinimumDate (DateTime.Now.AddDays(-5.0))
       Flatpickr.MaximumDate (DateTime.Now.AddDays(5.0))
       Flatpickr.EnableTimePicker true
-      Flatpickr.Value DateTime.Now ] """ ]
+      Flatpickr.Value DateTime.Now ] """
+          br [ ]
+          p [ ] [ str "Enable week numbers on calendar" ]
+          Flatpickr.flatpickr 
+            [ Flatpickr.ClassName "input"
+              Flatpickr.EnableTimePicker true
+              Flatpickr.EnableWeekNumbers true
+              Flatpickr.Value DateTime.Now ] 
+          br [ ]
+          br [ ]
+          Common.highlight """Flatpickr.flatpickr 
+    [ Flatpickr.ClassName "input"
+      Flatpickr.EnableTimePicker true
+      Flatpickr.EnableWeekNumbers true
+      Flatpickr.Value DateTime.Now ] """
+          br [ ]
+          p [ ] [ str "Disable specific dates" ]
+          Flatpickr.flatpickr 
+            [ Flatpickr.ClassName "input"
+              Flatpickr.DisableDates [DateTime.Now.AddDays(-1.0); DateTime.Now; DateTime.Now.AddDays(1.0) ] ] 
+          br [ ]
+          br [ ]
+          Common.highlight """Flatpickr.flatpickr 
+    [ Flatpickr.ClassName "input"
+      Flatpickr.DisableDates 
+        [ DateTime.Now.AddDays(-1.0)
+          DateTime.Now
+          DateTime.Now.AddDays(1.0) ] ]"""
+          br [ ]
+          p [ ] [ str "Disable specific date ranges" ]
+          Flatpickr.flatpickr 
+            [ Flatpickr.ClassName "input"
+              Flatpickr.DisableRanges 
+                [ DateTime.Now.AddDays(-1.0), DateTime.Now.AddDays(1.0)
+                  DateTime.Now.AddDays(10.0), DateTime.Now.AddDays(15.0) ] ] 
+          br [ ]
+          br [ ]
+          Common.highlight """Flatpickr.flatpickr 
+    [ Flatpickr.ClassName "input"
+      Flatpickr.DisableRanges 
+        [ DateTime.Now.AddDays(-1.0), DateTime.Now.AddDays(1.0)
+          DateTime.Now.AddDays(10.0), DateTime.Now.AddDays(15.0) ] ] """
+          br [ ]
+          p [ ] [ str "Disable dates by a generic predicate" ]
+          Flatpickr.flatpickr 
+            [ Flatpickr.ClassName "input"
+              Flatpickr.DisableBy (fun date -> date.DayOfWeek = DayOfWeek.Sunday) ] 
+          br [ ]
+          br [ ]
+          Common.highlight """Flatpickr.flatpickr 
+    [ Flatpickr.ClassName "input"
+      Flatpickr.DisableBy (fun date -> date.DayOfWeek = DayOfWeek.Sunday) ]"""
+          br [ ]
+          p [ ] [ str "Enable the dates that pass a certain criteria" ]
+          Flatpickr.flatpickr 
+            [ Flatpickr.ClassName "input"
+              Flatpickr.EnableBy (fun date -> date.DayOfWeek = DayOfWeek.Sunday 
+                                           || date.DayOfWeek = DayOfWeek.Saturday) ] 
+          br [ ]
+          br [ ]
+          Common.highlight """Flatpickr.flatpickr 
+    [ Flatpickr.ClassName "input"
+      Flatpickr.EnableBy (fun date -> date.DayOfWeek = DayOfWeek.Sunday 
+                                   || date.DayOfWeek = DayOfWeek.Saturday) ]""" ]
           

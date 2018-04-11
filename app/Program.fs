@@ -1,4 +1,4 @@
-module App
+module Program
 
 open Elmish
 open Elmish.HMR
