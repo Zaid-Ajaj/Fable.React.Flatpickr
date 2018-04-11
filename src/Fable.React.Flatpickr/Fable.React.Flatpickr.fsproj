@@ -3,7 +3,7 @@
     <Description>Fable.React binding for Flatpickr component</Description>
     <PackageProjectUrl>https://github.com/Zaid-Ajaj/elmish-components</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Zaid-Ajaj/elmish-components</RepositoryUrl>
-    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/Zaid-Ajaj/Fable.React.Flatpickr/blob/master/LICENSE</PackageLicenseUrl>
     <PackageIconUrl></PackageIconUrl>
     <PackageTags>fsharp;fable</PackageTags>
     <Authors>Zaid Ajaj</Authors>

@@ -22,6 +22,11 @@ type private DateRange = {
     from: DateTime
 }
 
+[<StringEnum>]
+type Mode = 
+    | Single 
+    | Multiple 
+    | Range 
 
 [<Emit("$2[$0] = $1")>]
 let private setProp (propName: string) (propValue: obj) (any: obj) : unit = jsNative
@@ -77,6 +82,13 @@ let OnChange (callback: DateTime -> unit) =
       Key = "onChange" }
     |> unbox<IFlatpickrOption>
 
+/// Registers an event handler for Flatpickr that is triggered when the user selects a new datetime value 
+let OnManyChanged (callback: DateTime list -> unit) =  
+    { Value = unbox (fun (dates: DateTime[]) -> callback (List.ofArray dates)); 
+      IsConfig = false;
+      Key = "onChange" }
+    |> unbox<IFlatpickrOption>
+
 /// Defines the class attribute for the Flatpickr element. Keep in mind that Flatpickr is implmented as wrapper around an `<input />` element. 
 let ClassName name = 
     { Value = name; IsConfig = false; Key = "className" }
@@ -102,6 +114,10 @@ let HideCalendar (value: bool) =
     { Value = value; IsConfig = true; Key = "noCalendar" }
     |> unbox<IFlatpickrOption>    
 
+let SelectionMode (mode: Mode) = 
+    { Value = mode; IsConfig = true; Key = "mode" }
+    |> unbox<IFlatpickrOption>    
+
 /// If set to true, makes sure that the picker is always set shown to the user
 let AlwaysOpen (value: bool) = 
     { Value = value; IsConfig = true; Key = "inline" }
@@ -116,6 +132,16 @@ let DisableDates (dates: list<DateTime>) =
 /// Disallow the user to select the dates using a predicate
 let DisableBy (pred: DateTime -> bool) = 
     { Value = [| pred |]; IsConfig = true; Key = "disable" }
+    |> unbox<IFlatpickrOption> 
+
+/// Adjusts the step for the minute input (incl. scrolling)
+let MinuteIncrement (min: int) = 
+    { Value = min; IsConfig = true; Key = "minuteIncrement" }
+    |> unbox<IFlatpickrOption> 
+
+/// Adjusts the step for the hour input (incl. scrolling)
+let HourIncrement (hours: int) = 
+    { Value = hours; IsConfig = true; Key = "hourIncrement" }
     |> unbox<IFlatpickrOption> 
 
 /// Disallow the user to select the dates that are between the given ranges
@@ -140,6 +166,21 @@ let EnableDates (dates: list<DateTime>) =
 /// Enable only the dates that pass a given criteria
 let EnableBy (pred: DateTime -> bool) = 
     { Value = [| pred |]; IsConfig = true; Key = "enable" }
+    |> unbox<IFlatpickrOption> 
+
+/// Allows using a custom date formatting function instead of the built-in handling for date formats using dateFormat.
+let FormatDateBy (map: DateTime -> string) = 
+    { Value = map; IsConfig = true; Key = "formatDate" }
+    |> unbox<IFlatpickrOption> 
+
+/// Displays time picker in 24 hour mode without AM/PM selection when enabled.
+let TimeTwentyFour (cond: bool) = 
+    { Value = cond; IsConfig = true; Key = "time_24hr" }
+    |> unbox<IFlatpickrOption> 
+
+/// Show the month using the shorthand version (ie, Sep instead of September).
+let UseShorthandMonthNames (cond: bool) = 
+    { Value = cond; IsConfig = true; Key = "shorthandCurrentMonth" }
     |> unbox<IFlatpickrOption> 
 
 /// Enable only the given list of date ranges

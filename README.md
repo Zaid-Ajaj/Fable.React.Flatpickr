@@ -7,9 +7,9 @@ A complete binding for [react-flatpickr](https://github.com/coderhaoxin/react-fl
 ```
 paket add Fable.React.Flatpickr --project /path/to/Project.fsproj
 ```
-- Install Flatpickr from npm
+- Install the actual Flatpickr library from npm
 ```
-npm install react-flatpickr --save
+npm install flatpickr react-flatpickr --save
 ```
 - You will also need css module loaders for Webpack because we are going to import the styles directly from npm `css-loader` and `style-loader`, install them :
 ```
@@ -48,4 +48,12 @@ let render state dispatch =
         [ Flatpickr.Value state.SelectedTime 
           Flatpickr.OnChange (UpdateSelectedTime >> dispatch)
           Flatpickr.ClassName "input" ]
+
+
+// Somewhere before you app starts
+// you must import the CSS theme
+
+importAll "flatpickr/dist/themes/material_green.css"
+
+// or any of the other themes in the dist directory of flatpickr
 ```

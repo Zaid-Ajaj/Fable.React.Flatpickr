@@ -8,9 +8,7 @@ open System
 
 let render (state: State) dispatch = 
     div [ ] 
-        [ h1 [ ] [ str "Flatpickr" ]
-          hr [ ] 
-          p [ ] [ str "Basic Flatpicker witout config:" ]
+        [ p [ ] [ str "Basic Flatpicker witout config:" ]
           Flatpickr.flatpickr [ ]
           br [ ] 
           br [ ] 
@@ -160,5 +158,33 @@ let render (state: State) dispatch =
           Common.highlight """Flatpickr.flatpickr 
     [ Flatpickr.ClassName "input"
       Flatpickr.EnableBy (fun date -> date.DayOfWeek = DayOfWeek.Sunday 
-                                   || date.DayOfWeek = DayOfWeek.Saturday) ]""" ]
+                                   || date.DayOfWeek = DayOfWeek.Saturday) ]"""
+          br [ ]
+          p [ ] [ str "Change selection mode to multple (then use OnManyChanged event handler)" ]
+          Flatpickr.flatpickr 
+            [ Flatpickr.ClassName "input"
+              Flatpickr.SelectionMode Flatpickr.Mode.Multiple
+              Flatpickr.OnManyChanged (fun x -> Fable.Import.Browser.console.log(x)) ] 
+          br [ ]
+          br [ ]
+          Common.highlight """Flatpickr.flatpickr 
+    [ Flatpickr.ClassName "input"
+      Flatpickr.SelectionMode Flatpickr.Mode.Multiple
+      Flatpickr.OnManyChanged (fun (dates: list<DateTime>) -> (* do stuff *)) ]"""
+          br [ ]
+          p [ ] [ str "Change selection mode to range (then use OnManyChanged event handler)" ]
+          Flatpickr.flatpickr 
+            [ Flatpickr.ClassName "input"
+              Flatpickr.SelectionMode Flatpickr.Mode.Range
+              Flatpickr.OnManyChanged (fun x -> Fable.Import.Browser.console.log(x)) ] 
+          br [ ]
+          br [ ]
+          Common.highlight """Flatpickr.flatpickr 
+    [ Flatpickr.ClassName "input"
+      Flatpickr.SelectionMode Flatpickr.Mode.Range
+      Flatpickr.OnManyChanged (fun (dates: list<DateTime>) -> 
+           match dates with 
+           | [ singleChoice ] -> unit 
+           | [ fromDate; toDate ] -> doSomethingInteresting
+           | moreValues -> (* you get the idea *)) ]""" ]
           
