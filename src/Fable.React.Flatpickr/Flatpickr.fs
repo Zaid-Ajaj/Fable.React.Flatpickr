@@ -114,6 +114,7 @@ let HideCalendar (value: bool) =
     { Value = value; IsConfig = true; Key = "noCalendar" }
     |> unbox<IFlatpickrOption>    
 
+/// The selection mode changes wether the use can select a single value, multiple values or an inclusive range of dates.
 let SelectionMode (mode: Mode) = 
     { Value = mode; IsConfig = true; Key = "mode" }
     |> unbox<IFlatpickrOption>    

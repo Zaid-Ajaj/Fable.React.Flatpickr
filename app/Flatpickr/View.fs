@@ -118,8 +118,7 @@ let render (state: State) dispatch =
           br [ ]
           p [ ] [ str "Disable specific dates" ]
           Flatpickr.flatpickr 
-            [ Flatpickr.ClassName "input"
-              Flatpickr.Value state.SelectedTime
+            [ Flatpickr.Value state.SelectedTime
               Flatpickr.OnChange (UpdateSelectedTime >> dispatch)
               Flatpickr.DisableDates [DateTime.Now.AddDays(-1.0); DateTime.Now; DateTime.Now.AddDays(1.0) ] ] 
           br [ ]
