@@ -16,7 +16,7 @@ let render (state: State) dispatch =
           br [ ]
           p [ ] [ str "Pre-select a default value" ] 
           Flatpickr.flatpickr 
-            [ Flatpickr.Value DateTime.Now 
+            [ Flatpickr.Value state.SelectedTime 
               Flatpickr.OnChange (UpdateSelectedTime >> dispatch)  ]
           br [ ]
           br [ ]
@@ -25,6 +25,7 @@ let render (state: State) dispatch =
           p [ ] [ str "Customizing the input with ClassName" ] 
           Flatpickr.flatpickr 
             [ Flatpickr.ClassName "input"
+              Flatpickr.Value state.SelectedTime
               Flatpickr.OnChange (UpdateSelectedTime >> dispatch)  ]
           br [ ]
           br [ ]
@@ -34,32 +35,33 @@ let render (state: State) dispatch =
           Flatpickr.flatpickr 
             [ Flatpickr.ClassName "input"
               Flatpickr.Disabled true
-              Flatpickr.Value DateTime.Now
-              Flatpickr.OnChange (UpdateSelectedTime >> dispatch) ] 
+              Flatpickr.Value state.SelectedTime ] 
           br [ ]
           br [ ]
           Common.highlight """Flatpickr.flatpickr 
     [ Flatpickr.ClassName "input"
       Flatpickr.Disabled true
-      Flatpickr.Value DateTime.Now ]"""
+      Flatpickr.Value state.SelectedTime ]"""
           br [ ] 
           p [ ] [ str "Enable time to show a time picker as well" ]
           Flatpickr.flatpickr 
             [ Flatpickr.ClassName "input"
               Flatpickr.EnableTimePicker true
-              Flatpickr.Value DateTime.Now ] 
+              Flatpickr.Value state.SelectedTime
+              Flatpickr.OnChange (UpdateSelectedTime >> dispatch)  ] 
           br [ ]
           br [ ]
           Common.highlight """Flatpickr.flatpickr 
     [ Flatpickr.ClassName "input"
       Flatpickr.EnableTimePicker true
-      Flatpickr.Value DateTime.Now ]"""
+      Flatpickr.Value state.SelectedTime ]"""
           br [ ] 
           p [ ] [ str "Use a custom date format" ]
           Flatpickr.flatpickr 
             [ Flatpickr.ClassName "input"
               Flatpickr.DateFormat "d.m.Y"
-              Flatpickr.Value DateTime.Now ] 
+              Flatpickr.Value state.SelectedTime
+              Flatpickr.OnChange (UpdateSelectedTime >> dispatch) ] 
           br [ ]
           br [ ]
           Common.highlight """Flatpickr.flatpickr 
@@ -72,7 +74,8 @@ let render (state: State) dispatch =
             [ Flatpickr.ClassName "input"
               Flatpickr.HideCalendar true
               Flatpickr.EnableTimePicker true
-              Flatpickr.Value DateTime.Now ] 
+              Flatpickr.Value state.SelectedTime
+              Flatpickr.OnChange (UpdateSelectedTime >> dispatch) ] 
           br [ ]
           br [ ]
           Common.highlight """Flatpickr.flatpickr 
@@ -87,7 +90,8 @@ let render (state: State) dispatch =
               Flatpickr.MinimumDate (DateTime.Now.AddDays(-5.0))
               Flatpickr.MaximumDate (DateTime.Now.AddDays(5.0))
               Flatpickr.EnableTimePicker true
-              Flatpickr.Value DateTime.Now ] 
+              Flatpickr.Value state.SelectedTime
+              Flatpickr.OnChange (UpdateSelectedTime >> dispatch) ] 
           br [ ]
           br [ ]
           Common.highlight """Flatpickr.flatpickr 
@@ -102,7 +106,8 @@ let render (state: State) dispatch =
             [ Flatpickr.ClassName "input"
               Flatpickr.EnableTimePicker true
               Flatpickr.EnableWeekNumbers true
-              Flatpickr.Value DateTime.Now ] 
+              Flatpickr.Value state.SelectedTime
+              Flatpickr.OnChange (UpdateSelectedTime >> dispatch) ] 
           br [ ]
           br [ ]
           Common.highlight """Flatpickr.flatpickr 
@@ -114,6 +119,8 @@ let render (state: State) dispatch =
           p [ ] [ str "Disable specific dates" ]
           Flatpickr.flatpickr 
             [ Flatpickr.ClassName "input"
+              Flatpickr.Value state.SelectedTime
+              Flatpickr.OnChange (UpdateSelectedTime >> dispatch)
               Flatpickr.DisableDates [DateTime.Now.AddDays(-1.0); DateTime.Now; DateTime.Now.AddDays(1.0) ] ] 
           br [ ]
           br [ ]
@@ -127,6 +134,8 @@ let render (state: State) dispatch =
           p [ ] [ str "Disable specific date ranges" ]
           Flatpickr.flatpickr 
             [ Flatpickr.ClassName "input"
+              Flatpickr.OnChange (UpdateSelectedTime >> dispatch)
+              Flatpickr.Value state.SelectedTime
               Flatpickr.DisableRanges 
                 [ DateTime.Now.AddDays(-1.0), DateTime.Now.AddDays(1.0)
                   DateTime.Now.AddDays(10.0), DateTime.Now.AddDays(15.0) ] ] 
@@ -141,6 +150,8 @@ let render (state: State) dispatch =
           p [ ] [ str "Disable dates by a generic predicate" ]
           Flatpickr.flatpickr 
             [ Flatpickr.ClassName "input"
+              Flatpickr.Value state.SelectedTime
+              Flatpickr.OnChange (UpdateSelectedTime >> dispatch)
               Flatpickr.DisableBy (fun date -> date.DayOfWeek = DayOfWeek.Sunday) ] 
           br [ ]
           br [ ]
@@ -151,6 +162,7 @@ let render (state: State) dispatch =
           p [ ] [ str "Enable the dates that pass a certain criteria" ]
           Flatpickr.flatpickr 
             [ Flatpickr.ClassName "input"
+              Flatpickr.Value state.SelectedTime
               Flatpickr.EnableBy (fun date -> date.DayOfWeek = DayOfWeek.Sunday 
                                            || date.DayOfWeek = DayOfWeek.Saturday) ] 
           br [ ]
