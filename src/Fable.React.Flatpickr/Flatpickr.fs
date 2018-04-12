@@ -77,7 +77,12 @@ let EnableWeekNumbers (cond: bool) =
 
 /// Registers an event handler for Flatpickr that is triggered when the user selects a new datetime value 
 let OnChange (callback: DateTime -> unit) =  
-    { Value = unbox (fun (dates: DateTime[]) -> callback dates.[0]); 
+    { Value = unbox (fun (dates: DateTime[]) -> 
+        // sometimes the library emits a null causing all kinds of errors
+        // if that's the case, we ignore it
+        if isNull (unbox<obj> dates) || Array.isEmpty dates 
+        then ()
+        else callback dates.[0]) 
       IsConfig = false;
       Key = "onChange" }
     |> unbox<IFlatpickrOption>
