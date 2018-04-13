@@ -60,6 +60,11 @@ let MaximumDate (date: DateTime) =
     { Value = date; IsConfig = true; Key = "maxDate" }
     |> unbox<IFlatpickrOption> 
 
+/// A placeholder text for the input. It will be shown when no date value is selected. 
+let Placeholder (placeholder: string) = 
+    { Value = placeholder; IsConfig = false; Key = "placeholder" }
+    |> unbox<IFlatpickrOption>
+
 /// Sets the initial value of the hour element (12 by default) 
 let DefaultHour (hour: int) =  
     { Value = hour; IsConfig = true; Key = "defaultHour" }

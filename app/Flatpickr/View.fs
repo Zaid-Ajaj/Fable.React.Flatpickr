@@ -83,6 +83,20 @@ let render (state: State) dispatch =
       Flatpickr.HideCalendar true
       Flatpickr.EnableTimePicker true
       Flatpickr.Value DateTime.Now ]"""
+          br [ ] 
+          p [ ] [ str "Use a placeholder" ]
+          Flatpickr.flatpickr 
+            [ Flatpickr.ClassName "input"
+              Flatpickr.Placeholder "Time of Delivery"
+              //Flatpickr.Value state.SelectedTime
+              Flatpickr.OnChange (UpdateSelectedTime >> dispatch) ] 
+          br [ ]
+          br [ ]
+          Common.highlight """Flatpickr.flatpickr 
+    [ Flatpickr.ClassName "input"
+      Flatpickr.Placeholder "Time of Delivery"
+      Flatpickr.OnChange (UpdateSelectedTime >> dispatch) ] """
+          br [ ]
           br [ ]
           p [ ] [ str "Customize a min/max range for selection" ]
           Flatpickr.flatpickr 
