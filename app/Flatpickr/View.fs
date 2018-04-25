@@ -9,16 +9,14 @@ open System
 let russian : Flatpickr.IFlatpickrLocale = 
                 Fable.Core.JsInterop.import "Russian" "flatpickr/dist/l10n/ru.js"
 
-
 let render (state: State) dispatch = 
     div [ ] 
         [ p [ ] [ str "Basic Flatpicker witout config:" ]
-          Flatpickr.flatpickr [  ]
+          Flatpickr.flatpickr [ ]
           br [ ] 
           br [ ] 
           Common.highlight "Flatpickr.flatpickr [ ]" 
           br [ ]
-        
           p [ ] [ str "Pre-select a default value" ] 
           Flatpickr.flatpickr 
             [ Flatpickr.Value state.SelectedTime 
