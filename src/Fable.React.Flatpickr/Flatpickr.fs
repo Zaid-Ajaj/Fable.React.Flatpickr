@@ -8,6 +8,7 @@ open Fable.Core
 open System
 
 type IFlatpickrOption = interface end
+type IFlatpickrLocale = interface end
 
 [<Pojo>]
 type private OptionType = {
@@ -207,6 +208,10 @@ let EnableRanges (ranges: list<DateTime * DateTime>) =
     { Value = rangeObjects; IsConfig = true; Key = "enable" }
     |> unbox<IFlatpickrOption> 
 
+/// Localize the instance
+let Locale (loc: IFlatpickrLocale) =
+    { Value = loc; IsConfig = true; Key = "locale" }
+    |> unbox<IFlatpickrOption> 
 
 /// Initializes Flatpickr, a lightweight DateTime picker. 
 let flatpickr (options: IFlatpickrOption list) = 
@@ -220,5 +225,3 @@ let flatpickr (options: IFlatpickrOption list) =
     
     setProp "options" propOptions props 
     ofImport "default" "react-flatpickr" props [ ]
-    
- 
