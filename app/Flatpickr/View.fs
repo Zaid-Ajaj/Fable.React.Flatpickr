@@ -6,14 +6,19 @@ open Fable.Helpers.React
 open Fable.Helpers.React.Props
 open System
 
+let russian : Flatpickr.IFlatpickrLocale = 
+                Fable.Core.JsInterop.import "Russian" "flatpickr/dist/l10n/ru.js"
+
+
 let render (state: State) dispatch = 
     div [ ] 
         [ p [ ] [ str "Basic Flatpicker witout config:" ]
-          Flatpickr.flatpickr [ ]
+          Flatpickr.flatpickr [  ]
           br [ ] 
           br [ ] 
           Common.highlight "Flatpickr.flatpickr [ ]" 
           br [ ]
+        
           p [ ] [ str "Pre-select a default value" ] 
           Flatpickr.flatpickr 
             [ Flatpickr.Value state.SelectedTime 
@@ -211,5 +216,13 @@ let render (state: State) dispatch =
            match dates with 
            | [ singleChoice ] -> unit 
            | [ fromDate; toDate ] -> doSomethingInteresting
-           | moreValues -> (* you get the idea *)) ]""" ]
-          
+           | moreValues -> (* you get the idea *)) ]""" 
+          br [ ]
+          p [ ] [ str "Flatpicker localized to Russian" ]
+          Flatpickr.flatpickr [Flatpickr.Locale (russian)]
+          br [ ] 
+          br [ ] 
+          Common.highlight """let russian : Flatpickr.IFlatpickrLocale = 
+    Fable.Core.JsInterop.import "Russian" "flatpickr/dist/l10n/ru.js"
+
+Flatpickr.flatpickr [Flatpickr.Locale (russian)]"""]
