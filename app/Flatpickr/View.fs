@@ -217,10 +217,8 @@ let render (state: State) dispatch =
            | moreValues -> (* you get the idea *)) ]""" 
           br [ ]
           p [ ] [ str "Flatpicker localized to Russian" ]
-          Flatpickr.flatpickr [Flatpickr.Locale (russian)]
+          Flatpickr.flatpickr [Flatpickr.Locale Flatpickr.Locales.russian]
           br [ ] 
           br [ ] 
-          Common.highlight """let russian : Flatpickr.IFlatpickrLocale = 
-    Fable.Core.JsInterop.import "Russian" "flatpickr/dist/l10n/ru.js"
-
-Flatpickr.flatpickr [Flatpickr.Locale (russian)]"""]
+          Common.highlight """
+Flatpickr.flatpickr [Flatpickr.Locale Flatpickr.Locales.russian]"""]

@@ -17,12 +17,6 @@ type private OptionType = {
     IsConfig : bool
 }
 
-[<Pojo>]
-type private DateRange = { 
-    ``to``: DateTime 
-    from: DateTime
-}
-
 [<StringEnum>]
 type Mode = 
     | Single 
@@ -225,3 +219,38 @@ let flatpickr (options: IFlatpickrOption list) =
     
     setProp "options" propOptions props 
     ofImport "default" "react-flatpickr" props [ ]
+
+
+module Locales = 
+    let russian : IFlatpickrLocale = import "Russian" "flatpickr/dist/l10n/ru.js"
+    let bulgarian : IFlatpickrLocale = import "Bulgarian" "flatpickr/dist/l10n/bg.js"
+    let czech : IFlatpickrLocale = import "Czech" "flatpickr/dist/l10n/cs.js"
+    let italian : IFlatpickrLocale = import "Italian" "flatpickr/dist/l10n/it.js"
+    let japanese : IFlatpickrLocale = import "Japanese" "flatpickr/dist/l10n/ja.js"
+    let korean : IFlatpickrLocale = import "Korean" "flatpickr/dist/l10n/ko.js"
+    let french : IFlatpickrLocale = import "French" "flatpickr/dist/l10n/fr.js"
+    let spanish : IFlatpickrLocale = import "Spanish" "flatpickr/dist/l10n/es.js"
+    let estonian : IFlatpickrLocale = import "Estonian" "flatpickr/dist/l10n/et.js"
+    let persian : IFlatpickrLocale = import "Persian" "flatpickr/dist/l10n/fa.js"
+    let finnish : IFlatpickrLocale = import "Finnish" "flatpickr/dist/l10n/fi.js"
+    let greek : IFlatpickrLocale = import "Greek" "flatpickr/dist/l10n/gr.js"
+    let hebrew : IFlatpickrLocale = import "Hebrew" "flatpickr/dist/l10n/hr.js"
+    let hindi : IFlatpickrLocale = import "Hindi" "flatpickr/dist/l10n/hi.js"
+    let croatian : IFlatpickrLocale = import "Croatian" "flatpickr/dist/l10n/hr.js"
+    let indonesian : IFlatpickrLocale = import "Indonesian" "flatpickr/dist/l10n/id.js"
+    let dutch : IFlatpickrLocale = import "Dutch" "flatpickr/dist/l10n/nl.js"
+    let norwegian : IFlatpickrLocale = import "Norwegian" "flatpickr/dist/l10n/no.js"
+    let polish : IFlatpickrLocale = import "Polish" "flatpickr/dist/l10n/pl.js"    
+    let portuguese : IFlatpickrLocale = import "Portuguese" "flatpickr/dist/l10n/pt.js"
+    let romanian : IFlatpickrLocale = import "Romanian" "flatpickr/dist/l10n/ro.js"
+    let slovak : IFlatpickrLocale = import "Slovak" "flatpickr/dist/l10n/sk.js"
+    let slovenian : IFlatpickrLocale = import "Slovenian" "flatpickr/dist/l10n/sl.js"
+    let albanian : IFlatpickrLocale = import "Albanian" "flatpickr/dist/l10n/sq.js"
+    let serbian : IFlatpickrLocale = import "Serbian" "flatpickr/dist/l10n/sr.js"
+    let thai : IFlatpickrLocale = import "Thai" "flatpickr/dist/l10n/th.js"
+    let turkish : IFlatpickrLocale = import "Turkish" "flatpickr/dist/l10n/tr.js"    
+    let ukrainian : IFlatpickrLocale = import "Ukrainian" "flatpickr/dist/l10n/uk.js"
+    let vietnamese : IFlatpickrLocale = import "Vietnamese" "flatpickr/dist/l10n/vn.js"
+    let Mandarin : IFlatpickrLocale = import "Mandarin" "flatpickr/dist/l10n/zh.js"
+    let german : IFlatpickrLocale = import "German" "flatpickr/dist/l10n/de.js"
+    let catalan : IFlatpickrLocale = import "Catalan" "flatpickr/dist/l10n/cat.js"
