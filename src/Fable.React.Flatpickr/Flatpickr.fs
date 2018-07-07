@@ -60,6 +60,11 @@ let Placeholder (placeholder: string) =
     { Value = placeholder; IsConfig = false; Key = "placeholder" }
     |> unbox<IFlatpickrOption>
 
+/// Defines the id of the input
+let Id (id: string) = 
+    { Value = id; IsConfig = false; Key = "id" }
+    |> unbox<IFlatpickrOption>
+
 /// Sets the initial value of the hour element (12 by default) 
 let DefaultHour (hour: int) =  
     { Value = hour; IsConfig = true; Key = "defaultHour" }
