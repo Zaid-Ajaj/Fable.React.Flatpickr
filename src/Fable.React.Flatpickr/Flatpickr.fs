@@ -65,6 +65,11 @@ let Id (id: string) =
     { Value = id; IsConfig = false; Key = "id" }
     |> unbox<IFlatpickrOption>
 
+/// Defines a custom property with key and value and flag that tells whether the option is from the flatpickr library or just an attribute of the input element
+let custom key value config = 
+    { Value = unbox value; IsConfig = config; Key = key }
+    |> unbox<IFlatpickrOption>
+
 /// Sets the initial value of the hour element (12 by default) 
 let DefaultHour (hour: int) =  
     { Value = hour; IsConfig = true; Key = "defaultHour" }
