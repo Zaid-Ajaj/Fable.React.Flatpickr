@@ -11,8 +11,8 @@ group Main
     nuget Fable.Elmish.Debugger
     nuget Fulma
     
-
 group Build
+  framework >= net45
   source https://api.nuget.org/v3/index.json
 
-  nuget FAKE
+  nuget FAKE ~> 4.64.6

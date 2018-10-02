@@ -10,7 +10,6 @@ open System
 type IFlatpickrOption = interface end
 type IFlatpickrLocale = interface end
 
-[<Pojo>]
 type private OptionType = {
     Value : obj
     Key : string

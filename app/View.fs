@@ -3,9 +3,6 @@ module App.View
 open App.Types
 
 open Fulma
-open Fulma.Elements
-open Fulma.Components
-open Fulma.Layouts
 open Fable.Helpers.React
 open Fable.Helpers.React.Props
 open Fable.Core.JsInterop
@@ -55,9 +52,9 @@ let spacing = Props.Style [ Props.Padding 20 ]
 
 let render (state: State) dispatch = 
     Columns.columns [ ] 
-        [ Column.column [ Column.Width (Column.All, Column.Is2) ] 
+        [ Column.column [ Column.Width (Screen.All, Column.Is2) ] 
                         [ div [ spacing ] [ sidebar state dispatch ] ] 
-          Column.column [ Column.Width (Column.All, Column.Is7) ] 
+          Column.column [ Column.Width (Screen.All, Column.Is7) ] 
                         [ div [ spacing ] 
                               [ introduction
                                 Components.Flatpickr.View.render state.Flatpickr (FlatpickrMsg >> dispatch) ]  ] ]

@@ -1,4 +1,5 @@
-# Fable.React.Flatpickr
+# Fable.React.Flatpickr [![Build Status](https://travis-ci.org/Zaid-Ajaj/Fable.React.Flatpickr.svg?branch=master)](https://travis-ci.org/Zaid-Ajaj/Fable.React.Flatpickr) [![Nuget](https://img.shields.io/nuget/v/Fable.React.Flatpickr.svg?maxAge=0&colorB=brightgreen)](https://www.nuget.org/packages/Fable.React.Flatpickr)
+
 
 A complete binding for [react-flatpickr](https://github.com/coderhaoxin/react-flatpickr) that is ready to use within [Elmish](https://github.com/fable-elmish/elmish) applications
 
