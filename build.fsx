@@ -85,7 +85,7 @@ Target "Compile" <| fun _ ->
     run dotnetCli "fable npm-run build --port free" app
 
 Target "PublishApp" <| fun _ ->
-    run "npm" "run publush" "."
+    run "npm" "run publish" "."
 
 "Clean"
   ==> "InstallNpmPackages"
