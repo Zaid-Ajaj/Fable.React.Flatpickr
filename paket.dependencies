@@ -1,16 +1,16 @@
 group Main
     source https://api.nuget.org/v3/index.json
     storage:none
-    
-    clitool dotnet-fable
+
     nuget FSharp.Core
-    nuget Fable.Core
-    nuget Fable.Elmish.React
-    nuget Fable.Elmish.Browser
-    nuget Fable.Elmish.HMR
-    nuget Fable.Elmish.Debugger
-    nuget Fulma
-    
+    nuget Fable.Core prerelease
+    nuget Fable.Elmish.React prerelease
+    nuget Fable.Elmish.Browser prerelease
+    nuget Fable.Elmish.HMR prerelease
+    nuget Fable.Elmish.Debugger prerelease
+    nuget Fulma prerelease
+    nuget Fable.Browser.Dom prerelease
+
 group Build
   framework >= net45
   source https://api.nuget.org/v3/index.json
