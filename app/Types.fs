@@ -1,15 +1,14 @@
-module App.Types 
-open Fable.Helpers.Isomorphic
+module App.Types
 
-type Page = 
-    | Introduction 
+type Page =
+    | Introduction
     | Usage
-    
-type State = { 
+
+type State = {
     CurrentPage : Page
-    Flatpickr : Components.Flatpickr.Types.State 
+    Flatpickr : Components.Flatpickr.Types.State
 }
 
-type Msg = 
+type Msg =
     | View of Page
     | FlatpickrMsg of Components.Flatpickr.Types.Msg

@@ -1,8 +1,8 @@
 [<RequireQualifiedAccess>]
 module Flatpickr
 
-open Fable.Helpers.React
-open Fable.Helpers.React.Props
+open Fable.React
+open Fable.React.Props
 open Fable.Core.JsInterop
 open Fable.Core
 open System
@@ -17,10 +17,10 @@ type private OptionType = {
 }
 
 [<StringEnum>]
-type Mode = 
-    | Single 
-    | Multiple 
-    | Range 
+type Mode =
+    | Single
+    | Multiple
+    | Range
 
 [<Emit("$2[$0] = $1")>]
 let private setProp (propName: string) (propValue: obj) (any: obj) : unit = jsNative
@@ -30,207 +30,207 @@ let private typed<'a> (x: obj) : 'a = jsNative
 let private getAs<'a> (x: obj) (key: string) : 'a = jsNative
 
 /// Sets the initial value for the Flatpickr component
-let Value (date: DateTime) = 
+let Value (date: DateTime) =
     { Value = date; IsConfig = false; Key = "value" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
 /// Determines whether or not the date picker also contains a time picker
-let EnableTimePicker (cond: bool) =  
+let EnableTimePicker (cond: bool) =
     { Value = cond; IsConfig = true; Key = "enableTime" }
-    |> unbox<IFlatpickrOption>    
+    |> unbox<IFlatpickrOption>
 
 /// Enables seconds in the time picker
-let EnableSecondsPicker (cond: bool) =  
+let EnableSecondsPicker (cond: bool) =
     { Value = cond; IsConfig = true; Key = "enableSeconds" }
-    |> unbox<IFlatpickrOption>  
+    |> unbox<IFlatpickrOption>
 
 /// The minimum date that a user can start picking from (inclusive).
-let MinimumDate (date: DateTime) =  
+let MinimumDate (date: DateTime) =
     { Value = date; IsConfig = true; Key = "minDate" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
 /// The minimum date that a user can start picking from (inclusive).
-let MaximumDate (date: DateTime) =  
+let MaximumDate (date: DateTime) =
     { Value = date; IsConfig = true; Key = "maxDate" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
-/// A placeholder text for the input. It will be shown when no date value is selected. 
-let Placeholder (placeholder: string) = 
+/// A placeholder text for the input. It will be shown when no date value is selected.
+let Placeholder (placeholder: string) =
     { Value = placeholder; IsConfig = false; Key = "placeholder" }
     |> unbox<IFlatpickrOption>
 
 /// Defines the id of the input
-let Id (id: string) = 
+let Id (id: string) =
     { Value = id; IsConfig = false; Key = "id" }
     |> unbox<IFlatpickrOption>
 
 /// Defines a custom property with key and value and flag that tells whether the option is from the flatpickr library or just an attribute of the input element
-let custom key value config = 
+let custom key value config =
     { Value = unbox value; IsConfig = config; Key = key }
     |> unbox<IFlatpickrOption>
 
-/// Sets the initial value of the hour element (12 by default) 
-let DefaultHour (hour: int) =  
+/// Sets the initial value of the hour element (12 by default)
+let DefaultHour (hour: int) =
     { Value = hour; IsConfig = true; Key = "defaultHour" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
-/// Sets the initial value of the minute element (0 by default) 
-let DefaultMinute (min: int) =  
+/// Sets the initial value of the minute element (0 by default)
+let DefaultMinute (min: int) =
     { Value = min; IsConfig = true; Key = "defaultMinute" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
 /// Enables display of week numbers in calendar.
-let EnableWeekNumbers (cond: bool) =  
+let EnableWeekNumbers (cond: bool) =
     { Value = cond; IsConfig = true; Key = "weekNumbers" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
-/// Registers an event handler for Flatpickr that is triggered when the user selects a new datetime value 
-let OnChange (callback: DateTime -> unit) =  
-    { Value = unbox (fun (dates: DateTime[]) -> 
+/// Registers an event handler for Flatpickr that is triggered when the user selects a new datetime value
+let OnChange (callback: DateTime -> unit) =
+    { Value = unbox (fun (dates: DateTime[]) ->
         // sometimes the library emits a null causing all kinds of errors
         // if that's the case, we ignore it
-        if isNull (unbox<obj> dates) || Array.isEmpty dates 
+        if isNull (unbox<obj> dates) || Array.isEmpty dates
         then ()
-        else callback dates.[0]) 
+        else callback dates.[0])
       IsConfig = false;
       Key = "onChange" }
     |> unbox<IFlatpickrOption>
 
-/// Registers an event handler for Flatpickr that is triggered when the user selects a new datetime value 
-let OnManyChanged (callback: DateTime list -> unit) =  
-    { Value = unbox (fun (dates: DateTime[]) -> callback (List.ofArray dates)); 
+/// Registers an event handler for Flatpickr that is triggered when the user selects a new datetime value
+let OnManyChanged (callback: DateTime list -> unit) =
+    { Value = unbox (fun (dates: DateTime[]) -> callback (List.ofArray dates));
       IsConfig = false;
       Key = "onChange" }
     |> unbox<IFlatpickrOption>
 
-/// Defines the class attribute for the Flatpickr element. Keep in mind that Flatpickr is implmented as wrapper around an `<input />` element. 
-let ClassName name = 
+/// Defines the class attribute for the Flatpickr element. Keep in mind that Flatpickr is implmented as wrapper around an `<input />` element.
+let ClassName name =
     { Value = name; IsConfig = false; Key = "className" }
     |> unbox<IFlatpickrOption>
 
 /// Defines the inline styles of the Flatpickr element
-let Style (props: CSSProp list) = 
+let Style (props: CSSProp list) =
     { Value = keyValueList CaseRules.LowerFirst props; IsConfig = false; Key = "style" }
     |> unbox<IFlatpickrOption>
 
 /// Defines whether or not the Flatpickr element is disabled.
-let Disabled (value: bool) = 
+let Disabled (value: bool) =
     { Value = value; IsConfig = false; Key = "disabled" }
     |> unbox<IFlatpickrOption>
 
 /// Defines how the date is displayed on the component
-let DateFormat (value: string) = 
+let DateFormat (value: string) =
     { Value = value; IsConfig = true; Key = "dateFormat" }
     |> unbox<IFlatpickrOption>
 
 /// Hides the calendar so that users cannot select dates
-let HideCalendar (value: bool) = 
+let HideCalendar (value: bool) =
     { Value = value; IsConfig = true; Key = "noCalendar" }
-    |> unbox<IFlatpickrOption>    
+    |> unbox<IFlatpickrOption>
 
 /// The selection mode changes wether the use can select a single value, multiple values or an inclusive range of dates.
-let SelectionMode (mode: Mode) = 
+let SelectionMode (mode: Mode) =
     { Value = mode; IsConfig = true; Key = "mode" }
-    |> unbox<IFlatpickrOption>    
+    |> unbox<IFlatpickrOption>
 
 /// If set to true, makes sure that the picker is always set shown to the user
-let AlwaysOpen (value: bool) = 
+let AlwaysOpen (value: bool) =
     { Value = value; IsConfig = true; Key = "inline" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
-/// Disallow the user to select the given dates 
-let DisableDates (dates: list<DateTime>) = 
-    let datesArray = Array.ofList dates 
+/// Disallow the user to select the given dates
+let DisableDates (dates: list<DateTime>) =
+    let datesArray = Array.ofList dates
     { Value = datesArray; IsConfig = true; Key = "disable" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
 /// Disallow the user to select the dates using a predicate
-let DisableBy (pred: DateTime -> bool) = 
+let DisableBy (pred: DateTime -> bool) =
     { Value = [| pred |]; IsConfig = true; Key = "disable" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
 /// Adjusts the step for the minute input (incl. scrolling)
-let MinuteIncrement (min: int) = 
+let MinuteIncrement (min: int) =
     { Value = min; IsConfig = true; Key = "minuteIncrement" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
 /// Adjusts the step for the hour input (incl. scrolling)
-let HourIncrement (hours: int) = 
+let HourIncrement (hours: int) =
     { Value = hours; IsConfig = true; Key = "hourIncrement" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
 /// Disallow the user to select the dates that are between the given ranges
 let DisableRanges (ranges: list<DateTime * DateTime>) =
-    let rangeObjects = 
-        ranges 
-        |> List.map (fun (fromDate, toDate) -> 
-            let range = obj() 
+    let rangeObjects =
+        ranges
+        |> List.map (fun (fromDate, toDate) ->
+            let range = obj()
             setProp "to" toDate range
             setProp "from" fromDate range
             range)
         |> Array.ofList
     { Value = rangeObjects; IsConfig = true; Key = "disable" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
 /// Enable only the given list of dates
-let EnableDates (dates: list<DateTime>) = 
-    let datesArray = Array.ofList dates 
+let EnableDates (dates: list<DateTime>) =
+    let datesArray = Array.ofList dates
     { Value = datesArray; IsConfig = true; Key = "enable" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
 /// Enable only the dates that pass a given criteria
-let EnableBy (pred: DateTime -> bool) = 
+let EnableBy (pred: DateTime -> bool) =
     { Value = [| pred |]; IsConfig = true; Key = "enable" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
 /// Allows using a custom date formatting function instead of the built-in handling for date formats using dateFormat.
-let FormatDateBy (map: DateTime -> string) = 
+let FormatDateBy (map: DateTime -> string) =
     { Value = map; IsConfig = true; Key = "formatDate" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
 /// Displays time picker in 24 hour mode without AM/PM selection when enabled.
-let TimeTwentyFour (cond: bool) = 
+let TimeTwentyFour (cond: bool) =
     { Value = cond; IsConfig = true; Key = "time_24hr" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
 /// Show the month using the shorthand version (ie, Sep instead of September).
-let UseShorthandMonthNames (cond: bool) = 
+let UseShorthandMonthNames (cond: bool) =
     { Value = cond; IsConfig = true; Key = "shorthandCurrentMonth" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
 /// Enable only the given list of date ranges
 let EnableRanges (ranges: list<DateTime * DateTime>) =
-    let rangeObjects = 
-        ranges 
-        |> List.map (fun (fromDate, toDate) -> 
-            let range = obj() 
+    let rangeObjects =
+        ranges
+        |> List.map (fun (fromDate, toDate) ->
+            let range = obj()
             setProp "to" toDate range
             setProp "from" fromDate range
             range)
         |> Array.ofList
     { Value = rangeObjects; IsConfig = true; Key = "enable" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
 /// Localize the instance
 let Locale (loc: IFlatpickrLocale) =
     { Value = loc; IsConfig = true; Key = "locale" }
-    |> unbox<IFlatpickrOption> 
+    |> unbox<IFlatpickrOption>
 
-/// Initializes Flatpickr, a lightweight DateTime picker. 
-let flatpickr (options: IFlatpickrOption list) = 
-    let props = obj() 
-    let propOptions = obj() 
-    
+/// Initializes Flatpickr, a lightweight DateTime picker.
+let flatpickr (options: IFlatpickrOption list) =
+    let props = obj()
+    let propOptions = obj()
+
     for option in unbox<list<OptionType>> options do
         if option.IsConfig
         then setProp option.Key option.Value propOptions
-        else setProp option.Key option.Value props 
-    
-    setProp "options" propOptions props 
+        else setProp option.Key option.Value props
+
+    setProp "options" propOptions props
     ofImport "default" "react-flatpickr" props [ ]
 
 
-module Locales = 
+module Locales =
     let russian : IFlatpickrLocale = import "Russian" "flatpickr/dist/l10n/ru.js"
     let bulgarian : IFlatpickrLocale = import "Bulgarian" "flatpickr/dist/l10n/bg.js"
     let czech : IFlatpickrLocale = import "Czech" "flatpickr/dist/l10n/cs.js"
@@ -249,7 +249,7 @@ module Locales =
     let indonesian : IFlatpickrLocale = import "Indonesian" "flatpickr/dist/l10n/id.js"
     let dutch : IFlatpickrLocale = import "Dutch" "flatpickr/dist/l10n/nl.js"
     let norwegian : IFlatpickrLocale = import "Norwegian" "flatpickr/dist/l10n/no.js"
-    let polish : IFlatpickrLocale = import "Polish" "flatpickr/dist/l10n/pl.js"    
+    let polish : IFlatpickrLocale = import "Polish" "flatpickr/dist/l10n/pl.js"
     let portuguese : IFlatpickrLocale = import "Portuguese" "flatpickr/dist/l10n/pt.js"
     let romanian : IFlatpickrLocale = import "Romanian" "flatpickr/dist/l10n/ro.js"
     let slovak : IFlatpickrLocale = import "Slovak" "flatpickr/dist/l10n/sk.js"
@@ -257,7 +257,7 @@ module Locales =
     let albanian : IFlatpickrLocale = import "Albanian" "flatpickr/dist/l10n/sq.js"
     let serbian : IFlatpickrLocale = import "Serbian" "flatpickr/dist/l10n/sr.js"
     let thai : IFlatpickrLocale = import "Thai" "flatpickr/dist/l10n/th.js"
-    let turkish : IFlatpickrLocale = import "Turkish" "flatpickr/dist/l10n/tr.js"    
+    let turkish : IFlatpickrLocale = import "Turkish" "flatpickr/dist/l10n/tr.js"
     let ukrainian : IFlatpickrLocale = import "Ukrainian" "flatpickr/dist/l10n/uk.js"
     let vietnamese : IFlatpickrLocale = import "Vietnamese" "flatpickr/dist/l10n/vn.js"
     let Mandarin : IFlatpickrLocale = import "Mandarin" "flatpickr/dist/l10n/zh.js"

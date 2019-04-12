@@ -8,7 +8,6 @@
     "start": "webpack-dev-server"
   },
   "dependencies": {
-    "babel-runtime": "6.23.0",
     "bulma": "^0.6.2",
     "flatpickr": "^4.4.4",
     "react": "^16.3.1",
@@ -18,13 +17,14 @@
     "remotedev": "^0.2.7"
   },
   "devDependencies": {
-    "babel-core": "6.25.0",
-    "babel-loader": "7.1.1",
-    "babel-plugin-transform-runtime": "6.23.0",
-    "babel-preset-env": "^1.6.1",
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/runtime": "^7.2.0",
     "css-loader": "^0.28.11",
-    "fable-loader": "1.1.6",
-    "fable-utils": "^1.0.6",
+    "fable-compiler": "^2.2.3",
+    "fable-loader": "^2.1.5",
     "gh-pages": "^1.1.0",
     "loglevel": "^1.6.0",
     "node-sass": "^4.8.3",
