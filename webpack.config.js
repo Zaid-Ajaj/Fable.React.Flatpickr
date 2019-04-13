@@ -7,22 +7,18 @@ function resolve(filePath) {
 }
 
 var babelOptions = {
-    presets: [
-        ["@babel/preset-env", {
-            "targets": "> 0.25%, not dead",
-            "modules": false,
-            // This adds polyfills when needed. Requires core-js dependency.
-            // See https://babeljs.io/docs/en/babel-preset-env#usebuiltins
-            "useBuiltIns": "usage",
-        }]
-    ],
-}
+  presets: [
+    ["@babel/preset-env", {
+        "modules": false,
+        "useBuiltIns": "entry",
+    }]
+  ]
+};
 
 var isProduction = process.argv.indexOf("-p") >= 0;
 console.log("Bundling for " + (isProduction ? "production" : "development") + "...");
 
 module.exports = {
-  devtool: "source-map",
   entry: resolve('./app/App.fsproj'),
   output: {
     filename: 'bundle.js',
@@ -46,14 +42,6 @@ module.exports = {
             define: isProduction ? [] : ["DEBUG"]
           }
         }
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: babelOptions
-        },
       },
       {
         test: /\.(sa|c)ss$/,

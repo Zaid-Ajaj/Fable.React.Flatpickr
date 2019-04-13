@@ -192,6 +192,7 @@ let FormatDateBy (map: DateTime -> string) =
 let TimeTwentyFour (cond: bool) =
     { Value = cond; IsConfig = true; Key = "time_24hr" }
     |> unbox<IFlatpickrOption>
+    
 
 /// Show the month using the shorthand version (ie, Sep instead of September).
 let UseShorthandMonthNames (cond: bool) =

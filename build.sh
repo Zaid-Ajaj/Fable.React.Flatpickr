@@ -40,4 +40,4 @@ else
 fi
 
 
-run $FAKE_EXE "$@" $FSIARGS $FSIARGS2 build.fsx
+run $FAKE_EXE $@ $FSIARGS $FSIARGS2 build.fsx
