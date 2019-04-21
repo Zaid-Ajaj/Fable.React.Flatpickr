@@ -7,18 +7,6 @@ open Fable.React
 open Fable.React.Props
 open Fable.Core.JsInterop
 
-let menuItem page current label dispatch =
-    li [ Common.classes [ "is-active", current = page ];
-         OnClick (fun _ -> dispatch (View page)) ]
-       [ a [ ] [ str label ] ]
-
-let sidebar state dispatch =
-    Menu.menu [ ]
-        [ img [ Src "https://fable-elmish.github.io/elmish/img/logo.png" ]
-          Menu.label [ ] [ str "General" ]
-          Menu.list [ ]
-               [ menuItem Introduction state.CurrentPage "Introduction" dispatch
-                 menuItem Usage state.CurrentPage "Usage" dispatch ] ]
 
 let introduction =
     div [ ]
@@ -51,10 +39,7 @@ let render state dispatch =
 let spacing = Props.Style [ Props.Padding 20 ]
 
 let render (state: State) dispatch =
-    Columns.columns [ ]
-        [ Column.column [ Column.Width (Screen.All, Column.Is2) ]
-                        [ div [ spacing ] [ sidebar state dispatch ] ]
-          Column.column [ Column.Width (Screen.All, Column.Is7) ]
-                        [ div [ spacing ]
-                              [ introduction
-                                Components.Flatpickr.View.render state.Flatpickr (FlatpickrMsg >> dispatch) ]  ] ]
+  div [ Style [ Padding 20.0 ] ] [
+    Components.Flatpickr.View.render state.Flatpickr (FlatpickrMsg >> dispatch)
+  ]
+  

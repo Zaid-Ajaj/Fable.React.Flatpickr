@@ -8,7 +8,7 @@ open Fable.Import
 open System
 
 let russian : Flatpickr.IFlatpickrLocale =
-                Fable.Core.JsInterop.import "Russian" "flatpickr/dist/l10n/ru.js"
+  Fable.Core.JsInterop.import "Russian" "flatpickr/dist/l10n/ru.js"
 
 let render (state: State) dispatch =
     div [ ]
