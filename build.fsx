@@ -54,7 +54,7 @@ Target "Clean" <| fun _ ->
 
 Target "InstallNpmPackages" (fun _ ->
   run "npm" "--version" __SOURCE_DIRECTORY__
-  run "npm" "install" __SOURCE_DIRECTORY__
+  run "yarn" "install" __SOURCE_DIRECTORY__
 )
 
 Target "Restore" <| fun _ ->
